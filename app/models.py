@@ -43,7 +43,11 @@ class Doctor(UserMixin,db.Model):
     email = db.Column(db.String(255),unique = True,index = True)
     profile = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
+    license = db.Column(db.String(255))
+    experience = db.Column(db.String())
     password_hash = db.Column(db.String(255))
+    type_of_patient = db.Column(db.String(255))
+
     @property
     def password(self):
         raise AttributeError('You cannnot read the password attribute')
@@ -66,7 +70,9 @@ class Patient(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     body = db.Column(db.String())
-    com = db.Column(db.String())
+    sad = db.Column(db.String())
+    feeling = db.Column(db.String())
+    mood = db.Column(db.String())
 
     talks = db.relationship("Talks", backref="patient", lazy = "dynamic")
 
@@ -92,7 +98,43 @@ class Talks(db.Model):
     __tablename__ = 'talks'
 
     id = db.Column(db.Integer,primary_key = True)
+    body = db.Column(db.String())
     patient_id = db.Column(db.Integer, db.ForeignKey("patient.id"))
 
     body=db.Column(db.String)
     
+    def save_talks(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_talks(cls):
+        Talks = talks.query.all()
+        return talks
+    @classmethod
+    def clear_pitches(cls):
+        Talks.all_patient.clear()
+    def get_pitches(id):
+        patient = Patient.query.all()
+        return patient
+
+class DocTalk(db.Model):
+    __tablename__ = 'doctalks'
+
+    id = db.Column(db.Integer,primary_key = True)
+    body=db.Column(db.String)
+    
+    def save_doctalks(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_doctalks(cls):
+        DocTalk = doctalks.query.all()
+        return talks
+    @classmethod
+    def clear_pitches(cls):
+        Talks.all_patient.clear()
+    def get_pitches(id):
+        patient = Patient.query.all()
+        return patient

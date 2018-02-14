@@ -1,0 +1,19 @@
+
+{% macro displayTalks(talk_list) %}
+ {% for talk in talk_list %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <hr>
+        <p style="color:orange">{{talk.body}} </p>
+    </div>
+  {% endfor %}
+{% endmacro %}
+
+
+{% macro displaydocTalks(doc_list) %}
+ {% for talk in doc_list %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+        <hr>
+        <p style="color:orange">{{talk.body}} </p>
+    </div>
+  {% endfor %}
+{% endmacro %}

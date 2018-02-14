@@ -1,6 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" >
+{% extends 'base.html' %} 
+ 
+{% import 'macros.html' as macro %}
 
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block content %}
+<div class=" col-md-6" style="text-align:center">
+  <div class="">
+    <hr>
+ </div>
+</div>
+<div>
+  
+</div>
 <head>
   <meta charset="UTF-8">
   <title>Chat</title>
@@ -8,7 +21,7 @@
   
   
       <style>
-        
+         
     *{
   font-family:'Helvetica Neue',Helvetica, sans-serif;
   font-size:14px;
@@ -140,7 +153,7 @@ a{
 
 <body>
 
-  <a href="http://dribbble.com/shots/966016-Messages?list=users" style="color:#09c; padding:20px; display:block; clear:both; text-align:center;">A HTML version of 'Messages' by Coleman Tharp</a>
+  <a href="http://dribbble.com/shots/966016-Messages?list=users" style="color:#09c; padding:20px; display:block; clear:both; text-align:center;"></a>
 
 <div class="container">
   <div class="header">
@@ -155,7 +168,7 @@ a{
       </div>
       <div class="message">
         <span>Bobby Giangeruso</span>
-        <p>Hey Mike, how are you doing?</p>
+        <p></p>
       </div>
     </div>
     <div class="message-box right-img">
@@ -165,12 +178,12 @@ a{
       </div>
       <div class="message">
         <span>Mike Moloney</span>
-        <p>Pretty good, Eating nutella, nommommom</p>
+        <p >{{macro.displaydocTalks(doc_list)}}</p>
       </div>
     </div>
     <div class="enter-message">
-      <input type="text" placeholder="Enter your message.."/>
-      <a href="#" class="send">Send</a>
+      
+        {{wtf.quick_form(doctorForm)}}
     </div>
   </div>
 </div>
@@ -185,4 +198,4 @@ a{
 
 </body>
 
-</html>
+{% endblock %}
