@@ -6,6 +6,7 @@
 
 
 {% block content %}
+
 <div class=" col-md-6" style="text-align:center">
   <div class="">
     <hr>
@@ -198,5 +199,9 @@ input[type=radio]:checked ~ label{
   color: #0DFF92;
 }
 </style>
+
+{{wtf.quick_form(userform)}}
+
+
 
 {% endblock %}

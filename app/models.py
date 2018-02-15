@@ -39,14 +39,9 @@ class Doctor(UserMixin,db.Model):
 
     id=  db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
-    phone_number = db.Column(db.Integer())
     email = db.Column(db.String(255),unique = True,index = True)
-    profile = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
-    license = db.Column(db.String(255))
-    experience = db.Column(db.String())
     password_hash = db.Column(db.String(255))
-    type_of_patient = db.Column(db.String(255))
+    doc_details = db.relationship('Doctor_details', backref='docdetails',lazy = "dynamic")
 
     @property
     def password(self):
@@ -63,6 +58,16 @@ class Doctor(UserMixin,db.Model):
 
     def __repr__(self):
         return f'User {self.username}'
+
+    
+    @classmethod
+    def get_doct(cls):
+        Doctor = doctor.query.all()
+        return doctor
+    @classmethod
+    def clear_doc(cls):
+        Doctor.all_doctor.clear()
+
 
 
 class Patient(db.Model):
@@ -90,6 +95,7 @@ class Patient(db.Model):
     @classmethod
     def clear_pitches(cls):
         Patient.all_patient.clear()
+
     def get_pitches(id):
         patient = Patient.query.all()
         return patient
@@ -103,6 +109,7 @@ class Patient(db.Model):
        
         self.body= body
         self.category= category
+
 
 
     
@@ -153,6 +160,7 @@ class DocTalk(db.Model):
         return patient
 
 
+
 class PatientTalk(db.Model):
     __tablename__ = 'patienttalks'
 
@@ -160,10 +168,23 @@ class PatientTalk(db.Model):
     body=db.Column(db.String)
     
     def save_patienttalks(self):
+
+class Doctor_details(db.Model):
+    __tablename__ = 'docdetails'
+    id = db.Column(db.Integer,primary_key = True)
+    license = db.Column(db.String(255))
+    phone_number = db.Column(db.Integer())
+    profile_pic_path = db.Column(db.String())
+    bio = db.Column(db.String(255))
+    doc_id = db.Column(db.Integer, db.ForeignKey("doctor.id"))
+    
+    def save_docdetails(self):
+
         db.session.add(self)
         db.session.commit()
 
     @classmethod
+
     def get_patienttalks(cls):
         DocTalk = doctalks.query.all()
         return talks
@@ -174,4 +195,13 @@ class PatientTalk(db.Model):
         patient = Patient.query.all()
         return patient
 
+
+
+    def get_docdetails(cls):
+        Doctor_details = docdetails.query.filter_by(id=id).all()
+        return talks
+    @classmethod
+    def clear_docdetails(cls):
+        Talks.all_patient.clear()
+   
 
