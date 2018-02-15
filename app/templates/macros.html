@@ -17,3 +17,35 @@
     </div>
   {% endfor %}
 {% endmacro %}
+
+{% macro displadocdetails (docdetails_list)%}
+
+{% for  docdetails in docdetails_list %}
+<div class="well">
+
+  {{docdetails.bio}}
+  {{docdetails.license}}
+  {{docdetails.phone_number}}
+  {{docdetails.profile_pic_path}}
+  {{docdetails.bio}}
+
+</div>
+
+
+    {% endfor %}
+  {% endmacro%}
+
+  {% macro displayPatient (patient_lsit) %}
+
+    {% for patient in patient_lsit %}
+  <div class="well">
+    {{patient.body}}
+    {{patient.sad}}
+    {{patient.feeling}}
+    {{patient.mood}}
+
+
+  </div>
+
+      {%endfor%}
+    {% endmacro %}
