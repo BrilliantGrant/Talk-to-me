@@ -1,13 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,BooleanField,SubmitField
+from wtforms import StringField,PasswordField,BooleanField,SubmitField,SelectField
 from wtforms.validators import Required,Email,EqualTo
 from ..models import Doctor
 from wtforms import ValidationError
 
 class RegistrationForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(),Email()])
-    phoneNumber = StringField('Enter your phoneNumber',validators = [Required()])
-    phoneNumber = StringField('Enter your Photo',validators = [Required()])
     username = StringField('Enter your username',validators = [Required()])
     password = PasswordField('Password',validators = [Required(),
     EqualTo('password_confirm',message = 'Passwords must match')])
