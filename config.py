@@ -6,7 +6,7 @@ class Config:
     General configuration parent class
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://anynonimus:anynonimus@localhost/talk'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://bri:12345@localhost/talk'
 
     #  email configurations
         # MAIL_SERVER = 'smtp.googlemail.com'

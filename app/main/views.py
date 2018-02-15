@@ -1,9 +1,9 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort
 from flask_login import login_required,current_user
-from .forms import TalkForm,doctorForm
+from .forms import TalkForm,doctorForm,patientForm
 from .. import db
-from ..models import Talks,DocTalk
+from ..models import Talks,DocTalk,PatientTalk
 
 
 @main.route('/')
@@ -13,7 +13,8 @@ def index():
     '''
     title = 'Home - Welcome to The best Pitching Website Online'
 
-
+    # category = Category.query.all()
+    # print(Category)
 
     return render_template('index.html',title=title)
 @main.route('/talk', methods=['GET', 'POST'])
@@ -48,4 +49,18 @@ def doc_see():
     return render_template('doctor.html',talks=talks,doctorForm=form)
 
 
+@main.route('/patient',methods=['GET', 'POST'])
+
+def patient_see():
+    talks = Talks.query.all()
+    form = patientForm()
+
     
+
+    if form.validate_on_submit():
+        body = form.body.data
+        new_body = PatientTalk(body=body)
+        new_body.save_patienttalks()
+        return redirect(url_for('main.doc_see'))
+    
+    return render_template('patient.html',talks=talks,patientForm=form)

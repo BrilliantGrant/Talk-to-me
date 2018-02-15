@@ -73,6 +73,7 @@ class Patient(db.Model):
     sad = db.Column(db.String())
     feeling = db.Column(db.String())
     mood = db.Column(db.String())
+    category = db.Column(db.String(255))
 
     talks = db.relationship("Talks", backref="patient", lazy = "dynamic")
 
@@ -92,6 +93,18 @@ class Patient(db.Model):
     def get_pitches(id):
         patient = Patient.query.all()
         return patient
+
+     @classmethod
+    def get_categories(cls, category):
+        pitch_cat = Pitch.query.filter_by(category=category)
+        return pitch_cat
+
+    def __init__(self,body, category):
+       
+        self.body= body
+        self.category= category
+
+
     
 
 class Talks(db.Model):
@@ -138,3 +151,27 @@ class DocTalk(db.Model):
     def get_pitches(id):
         patient = Patient.query.all()
         return patient
+
+
+class PatientTalk(db.Model):
+    __tablename__ = 'patienttalks'
+
+    id = db.Column(db.Integer,primary_key = True)
+    body=db.Column(db.String)
+    
+    def save_patienttalks(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_patienttalks(cls):
+        DocTalk = doctalks.query.all()
+        return talks
+    @classmethod
+    def clear_pitches(cls):
+        Talks.all_patient.clear()
+    def get_pitches(id):
+        patient = Patient.query.all()
+        return patient
+
+

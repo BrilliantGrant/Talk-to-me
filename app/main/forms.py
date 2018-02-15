@@ -16,3 +16,10 @@ class doctorForm(FlaskForm):
     '''
     body = TextAreaField('',validators=[Required()])
     submit = SubmitField('send')
+
+class patientForm(FlaskForm):
+    body = TextAreaField('How you feeling',validators=[Required()])
+    comment = TextAreaField(' how would you describe your mood?',validators=[Required()])
+    choice = TextAreaField('',validators=[Required()])
+    submit = SubmitField('send')
+    category =SelectField('choose from the following categories', choices=[('sad','sad'),('feeling','feeling'),('mood','mood')],validators=[Required()])
