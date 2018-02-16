@@ -100,7 +100,7 @@ class Patient(db.Model):
         patient = Patient.query.all()
         return patient
 
-     @classmethod
+    @classmethod
     def get_categories(cls, category):
         pitch_cat = Pitch.query.filter_by(category=category)
         return pitch_cat
@@ -168,6 +168,8 @@ class PatientTalk(db.Model):
     body=db.Column(db.String)
     
     def save_patienttalks(self):
+        pass
+
 
 class Doctor_details(db.Model):
     __tablename__ = 'docdetails'
